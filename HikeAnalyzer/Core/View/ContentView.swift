@@ -29,6 +29,7 @@ struct ContentView: View {
                         .foregroundColor(.white)
                 }
             }
+            .tint(.trailTheme)
             .navigationTitle("Trail Analyzer")
             .trailTheme()
         }
