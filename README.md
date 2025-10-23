@@ -226,7 +226,15 @@ HikeAnalyzer/
 
 This is a personal educational project, but feel free to fork it and make your own improvements! If you have suggestions or find bugs, please open an issue.
 
-## 📄 License
+## � Changelog
+
+### Recent Updates (October 2025)
+- **Project Cleanup**: Removed unused background image assets and legacy Message.swift model
+- **Code Optimization**: Streamlined codebase with ChatMessage model implementation
+- **Improved Maintenance**: Added comprehensive .gitignore for better version control
+- **Enhanced Performance**: Reduced app bundle size by removing unused assets
+
+## �📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
