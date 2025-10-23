@@ -271,11 +271,28 @@ This is a personal educational project, but feel free to fork it and make your o
 ### Recent Updates (October 2025)
 
 - **📱 Device Compatibility Solution**: Resolved iPhone 13 AI chat connection errors
-  - Implemented intelligent fallback system for devices without FoundationModels support
-  - Added comprehensive hiking knowledge database with contextual responses
-  - Eliminated "Connection Error" issues with adaptive AI architecture
-  - Created specialized responses for safety, gear, weather, planning, and emergencies
-  - Ensured universal functionality across all supported iOS devices
+  - Implemented iOS 26+ FoundationModels availability detection
+  - Added clean binary approach (AI enabled vs. graceful fallback)
+  - Eliminated "Connection Error" issues with proper device support checking
+  - Streamlined service architecture for better maintainability
+
+- **🎯 AI Service Simplification**: Major refactoring of HikingAIService
+  - Replaced complex fallback system with clean iOS 26+ detection
+  - Simplified code architecture while maintaining full functionality
+  - Improved error handling with user-friendly messaging
+  - Reduced complexity while enhancing reliability
+
+- **📋 Constants Management**: Introduced centralized string management
+  - Created ChatConstants.swift for all user-facing strings
+  - Organized welcome messages, errors, and system prompts
+  - Enhanced maintainability and consistency across the app
+  - Eliminated hardcoded strings throughout the codebase
+
+- **⌨️ Enhanced User Experience**: Improved keyboard interaction
+  - Added tap-to-dismiss keyboard functionality on main screen
+  - Implemented proper keyboard management for trail input forms
+  - Enhanced overall app usability and professional feel
+  - Better user interaction patterns throughout the interface
 
 - **🚀 Major Architecture Refactoring**: Implemented MVVM pattern with @Observable
   - Migrated from `@ObservableObject` to modern `@Observable` macro
