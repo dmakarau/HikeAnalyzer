@@ -9,11 +9,10 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 ![Swift](https://img.shields.io/badge/Swift-5.9+-FA7343?style=for-the-badge&logo=swift&logoColor=white)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-4.0+-007AFF?style=for-the-badge&logo=swift&logoColor=white)
 ![Core ML](https://img.shields.io/badge/Core%20ML-5.0+-34C759?style=for-the-badge&logo=apple&logoColor=white)
-![Xcode](https://img.shields.io/badge/Xcode-15.0+-147EFB?style=for-the-badge&logo=xcode&logoColor=white)
+![Foundation](https://img.shields.io/badge/Foundation-iOS%2017+-000000?style=for-the-badge&logo=apple&logoColor=white)
 
-![iOS](https://img.shields.io/badge/iOS-17.0+-000000?style=for-the-badge&logo=ios&logoColor=white)
-![Machine Learning](https://img.shields.io/badge/Machine%20Learning-MLModel-FF6B35?style=for-the-badge&logo=tensorflow&logoColor=white)
-![MVVM](https://img.shields.io/badge/Architecture-MVVM-6C5CE7?style=for-the-badge&logo=swift&logoColor=white)
+![Xcode](https://img.shields.io/badge/Xcode-15.0+-147EFB?style=for-the-badge&logo=xcode&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-17.0+-007AFF?style=for-the-badge&logo=ios&logoColor=white)
 ![Educational](https://img.shields.io/badge/Purpose-Educational-4CAF50?style=for-the-badge&logo=graduation-cap&logoColor=white)
 
 </div>
@@ -59,13 +58,13 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 | ![Swift](https://img.shields.io/badge/Swift-5.9+-FA7343?style=flat-square&logo=swift&logoColor=white) | 5.9+ | Primary programming language |
 | ![SwiftUI](https://img.shields.io/badge/SwiftUI-4.0+-007AFF?style=flat-square&logo=swift&logoColor=white) | 4.0+ | Declarative UI framework |
 | ![Core ML](https://img.shields.io/badge/Core%20ML-5.0+-34C759?style=flat-square&logo=apple&logoColor=white) | 5.0+ | On-device machine learning |
-| ![Combine](https://img.shields.io/badge/Combine-iOS%2017+-FF9500?style=flat-square&logo=swift&logoColor=white) | iOS 17+ | Reactive programming |
+| ![Foundation](https://img.shields.io/badge/Foundation-iOS%2017+-000000?style=flat-square&logo=apple&logoColor=white) | iOS 17+ | Core data types and models |
 
-### **Architecture & Patterns**
-- **MVVM Pattern**: Clean separation of concerns
-- **Dependency Injection**: Testable and maintainable code
-- **Protocol-Oriented Programming**: Flexible and reusable components
-- **Reactive Programming**: Smooth data flow with Combine
+### **Key Features**
+- **State Management**: SwiftUI's native `@State` and `@Binding`
+- **Custom UI Components**: Reusable SwiftUI views and modifiers
+- **ML Integration**: Core ML model for risk prediction
+- **Modern Design**: Custom color system and animations
 
 ### **Design System**
 - **Custom Color Palette**: Professional gradient-based theme
