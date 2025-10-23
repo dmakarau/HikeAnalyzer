@@ -97,10 +97,10 @@ final class ChatViewModel {
     
     private func handleAIError(_ error: Error) {
         hasError = true
-        errorMessage = "I'm having trouble connecting right now. Please try again."
+        errorMessage = ChatConstants.Errors.connectionError
         
         // Add fallback message to chat
-        addAIMessage("I'm sorry, I'm having trouble connecting right now. Please try again in a moment.")
+        addAIMessage(ChatConstants.Errors.connectionErrorDetailed)
     }
 }
 
