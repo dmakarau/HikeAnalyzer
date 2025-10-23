@@ -14,7 +14,7 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 ![iOS](https://img.shields.io/badge/iOS-17.0+-000000?style=for-the-badge&logo=ios&logoColor=white)
 ![Machine Learning](https://img.shields.io/badge/Machine%20Learning-MLModel-FF6B35?style=for-the-badge&logo=tensorflow&logoColor=white)
 ![MVVM](https://img.shields.io/badge/Architecture-MVVM-6C5CE7?style=for-the-badge&logo=swift&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Educational](https://img.shields.io/badge/Purpose-Educational-4CAF50?style=for-the-badge&logo=graduation-cap&logoColor=white)
 
 </div>
 
@@ -191,12 +191,7 @@ This is a personal educational project, but feel free to fork it and make your o
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Author
-
-**Denis Makarau**
-- GitHub: [@dmakarau](https://github.com/dmakarau)
-
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - SwiftUI community for design inspiration
 - Core ML team for machine learning framework
