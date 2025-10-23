@@ -8,37 +8,90 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var trailInfo  = TrailInfo()
+    @State private var trailInfo = TrailInfo()
+    @State private var isAnimating = false
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                Text("Enter the data about your upcoming hike ")
-                    .font(.subheadline.bold())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading)
-                
-                HikeInfoView(trailInfo: $trailInfo)
-                
-                NavigationLink {
-                    let analyzer = TrailAnalyzer()
-                    let risk = analyzer.predictRisk(trailInfo: trailInfo)
-                    PredictionResultView(risk: risk)
-                    Text("Results")
-                } label: {
-                    Text("Submit")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(.tint, in: RoundedRectangle(cornerRadius: 12))
-                        .foregroundColor(.white)
+                VStack(spacing: .spacing.md) {
+                    // Header Section
+                    HeaderView()
+                        .opacity(isAnimating ? 1 : 0)
+                        .offset(y: isAnimating ? 0 : -20)
+                        .animation(.easeOut(duration: 0.8).delay(0.1), value: isAnimating)
+                    
+                    // Input Form
+                    VStack(spacing: .spacing.sm) {
+                        HikeInfoView(trailInfo: $trailInfo)
+                    }
+                    .opacity(isAnimating ? 1 : 0)
+                    .offset(y: isAnimating ? 0 : 20)
+                    .animation(.easeOut(duration: 0.8).delay(0.3), value: isAnimating)
+                    
+                    // Submit Button
+                    NavigationLink {
+                        let analyzer = TrailAnalyzer()
+                        let risk = analyzer.predictRisk(trailInfo: trailInfo)
+                        PredictionResultView(risk: risk)
+                    } label: {
+                        HStack(spacing: .spacing.sm) {
+                            Image(systemName: "chart.line.uptrend.xyaxis")
+                                .font(.headline)
+                            Text("Analyze Trail")
+                        }
+                        .primaryButtonStyle()
+                    }
+                    .opacity(isAnimating ? 1 : 0)
+                    .offset(y: isAnimating ? 0 : 20)
+                    .animation(.easeOut(duration: 0.8).delay(0.5), value: isAnimating)
                 }
+                .padding(.vertical, .spacing.md)
             }
-            .tint(.trailTheme)
             .navigationTitle("Trail Analyzer")
+            .navigationBarTitleDisplayMode(.large)
             .trailTheme()
+            .onAppear {
+                isAnimating = true
+            }
         }
-        
+        .tint(Color.theme.primary)
     }
+}
+
+struct HeaderView: View {
+    var body: some View {
+        VStack(spacing: .spacing.sm) {
+            Image(systemName: "mountain.2.fill")
+                .font(.system(size: 40))
+                .foregroundStyle(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color.theme.primary,
+                            Color.theme.primaryDark
+                        ]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+            
+            VStack(spacing: .spacing.xs) {
+                Text("Plan Your Adventure")
+                    .font(.theme.headline)
+                    .foregroundColor(Color.theme.textPrimary)
+                
+                Text("Enter your hike details for personalized risk analysis")
+                    .font(.theme.subheadline)
+                    .foregroundColor(Color.theme.textSecondary)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding(.horizontal, .spacing.md)
+    }
+}
+
+#Preview {
+    ContentView()
 }
 
 #Preview {
