@@ -20,9 +20,9 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 ## 📱 Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/main-screen.png" width="250" alt="Main Screen">
-  <img src="docs/screenshots/analysis-result.png" width="250" alt="Analysis Result">
-  <img src="docs/screenshots/risk-guide.png" width="250" alt="Risk Levels Guide">
+  <img src="docs/screenshot/main-screen.png" width="250" alt="Main Screen">
+  <img src="docs/screenshot/analysis-result.png" width="250" alt="Analysis Result">
+  <img src="docs/screenshot/risk-guide.png" width="250" alt="Risk Levels Guide">
 </p>
 
 ## ✨ Features
