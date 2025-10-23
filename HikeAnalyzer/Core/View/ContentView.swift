@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var trailInfo  = TrailInfo()
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -16,9 +17,12 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading)
                 
-                HikeInfoView()
+                HikeInfoView(trailInfo: $trailInfo)
                 
                 NavigationLink {
+                    let analyzer = TrailAnalyzer()
+                    let risk = analyzer.predictRisk(trailInfo: trailInfo)
+                    PredictionResultView(risk: risk)
                     Text("Results")
                 } label: {
                     Text("Submit")

@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct HikeInfoView: View {
-    @State private var distance: String = ""
-    @State private var elevationChange: String = ""
-    @State private var terrain: Terrain = .dirt
-    @State private var willifeDanger: WildlifeDanger = .low
+    @Binding var trailInfo: TrailInfo
+    
     var body: some View {
         VStack {
             HikeInputView(iconName: "figure.hiking", label: "Distance") {
-                TextField("Kilometers", text: $distance)
+                TextField("Kilometers", value: $trailInfo.distance, format: .number)
+                    .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
             }
             HikeInputView(iconName: "mountain.2.fill", label: "Elevation Change") {
-                TextField("Meters", text: $elevationChange)
+                TextField("Meters", value: $trailInfo.elevation, format: .number)
+                    .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
             }
             HikeInputView(iconName: "shoe.fill", label: "Terrain") {
-                Picker("Terrain", selection: $terrain) {
+                Picker("Terrain", selection: $trailInfo.terrain) {
                     ForEach(Terrain.allCases) { terrain in
                         Text(terrain.rawValue.capitalized).tag(terrain)
                     }
@@ -33,9 +33,9 @@ struct HikeInfoView: View {
                 
             }
             HikeInputView(iconName: "exclamationmark.triangle.fill", label: "Danger") {
-                Picker("Danger", selection: $willifeDanger) {
+                Picker("Danger", selection: $trailInfo.willifeDanger) {
                     ForEach(WildlifeDanger.allCases) { danger in
-                        Text(danger.rawValue.capitalized).tag(danger)
+                        Text(danger.description.capitalized).tag(danger)
                     }
                 }
                 .frame(width: 140)
@@ -48,5 +48,6 @@ struct HikeInfoView: View {
 }
 
 #Preview {
-    HikeInfoView()
+    @Previewable @State var trailInfo = TrailInfo()
+    HikeInfoView(trailInfo: $trailInfo)
 }

@@ -7,9 +7,16 @@
 
 import Foundation
 
-enum WildlifeDanger: String, Identifiable, CaseIterable {
+enum WildlifeDanger: Int, Identifiable, CaseIterable {
     case low
     case high
     
-    var id: String { rawValue }
+    var description: String {
+        switch self {
+        case .low: return "Low"
+        case .high: return "High"
+        }
+    }
+    
+    var id: Int { rawValue }
 }

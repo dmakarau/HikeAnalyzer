@@ -8,9 +8,10 @@ import SwiftUI
 
 struct PredictionResultView: View {
     @State private var showInfo: Bool = false
+    let risk: Risk
     var body: some View {
         VStack {
-            RiskCardView(riskLevel: .easy)
+            RiskCardView(riskLevel: risk)
             Spacer()
         }
         .navigationTitle("Result")
@@ -34,6 +35,6 @@ struct PredictionResultView: View {
 
 #Preview {
     NavigationStack {
-        PredictionResultView()
+        PredictionResultView(risk: .difficult)
     }
 }
