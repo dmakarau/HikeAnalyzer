@@ -28,8 +28,8 @@ struct HikingAIService {
         if isFoundationModelsAvailable {
             #if canImport(FoundationModels)
             do {
-                let model = SystemLanguageModel.default
-                let session = LanguageModelSession {
+                let model = SystemLanguageModel()
+                let session = LanguageModelSession(model: model) {
                     ChatConstants.SystemPrompts.hikingAssistant
                 }
                 
@@ -53,3 +53,4 @@ struct HikingAIService {
         }
     }
 }
+
