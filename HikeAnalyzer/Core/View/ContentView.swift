@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var trailInfo = TrailInfo()
     @State private var isAnimating = false
+    @State private var showAISupport = false
     
     var body: some View {
         NavigationStack {
@@ -45,6 +46,21 @@ struct ContentView: View {
                     .opacity(isAnimating ? 1 : 0)
                     .offset(y: isAnimating ? 0 : 20)
                     .animation(.easeOut(duration: 0.8).delay(0.5), value: isAnimating)
+                    
+                    // AI Support Button
+                    Button {
+                        showAISupport = true
+                    } label: {
+                        HStack(spacing: .spacing.sm) {
+                            Image(systemName: "questionmark.bubble.fill")
+                                .font(.headline)
+                            Text("AI Hiking Assistant")
+                        }
+                        .supportButtonStyle()
+                    }
+                    .opacity(isAnimating ? 1 : 0)
+                    .offset(y: isAnimating ? 0 : 20)
+                    .animation(.easeOut(duration: 0.8).delay(0.7), value: isAnimating)
                 }
                 .padding(.vertical, .spacing.md)
             }
@@ -53,6 +69,9 @@ struct ContentView: View {
             .trailTheme()
             .onAppear {
                 isAnimating = true
+            }
+            .sheet(isPresented: $showAISupport) {
+                AISupportChatView()
             }
         }
         .tint(Color.theme.primary)

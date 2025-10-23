@@ -72,6 +72,37 @@ extension View {
                 y: 4
             )
     }
+    
+    func supportButtonStyle() -> some View {
+        self
+            .font(.subheadline)
+            .fontWeight(.medium)
+            .frame(maxWidth: .infinity)
+            .frame(height: 48)
+            .background(Color.theme.cardBackground)
+            .foregroundColor(Color.theme.secondary)
+            .overlay(
+                RoundedRectangle(cornerRadius: 14)
+                    .stroke(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color.theme.secondary.opacity(0.5),
+                                Color.theme.secondary
+                            ]),
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        ),
+                        lineWidth: 2
+                    )
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .shadow(
+                color: Color.theme.secondary.opacity(0.2),
+                radius: 4,
+                x: 0,
+                y: 2
+            )
+    }
 }
 
 // MARK: - Modern Color System

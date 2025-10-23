@@ -1,6 +1,6 @@
 # 🏔️ HikeAnalyzer
 
-A modern iOS app that provides intelligent trail risk assessment using machine learning to help hikers plan safer adventures.
+A modern iOS app that provides intelligent trail risk assessment using machine learning and AI-powered hiking assistance to help outdoor enthusiasts plan safer adventures and get expert guidance on the go.
 
 ## 🛠️ Tech Stack
 
@@ -9,6 +9,8 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 ![Swift](https://img.shields.io/badge/Swift-5.9+-FA7343?style=for-the-badge&logo=swift&logoColor=white)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-4.0+-007AFF?style=for-the-badge&logo=swift&logoColor=white)
 ![Core ML](https://img.shields.io/badge/Core%20ML-5.0+-34C759?style=for-the-badge&logo=apple&logoColor=white)
+![FoundationModels](https://img.shields.io/badge/FoundationModels-AI%20LLM-FF6B35?style=for-the-badge&logo=apple&logoColor=white)
+![Async/Await](https://img.shields.io/badge/Async%2FAwait-Concurrency-9B59B6?style=for-the-badge&logo=swift&logoColor=white)
 ![Foundation](https://img.shields.io/badge/Foundation-iOS%2017+-000000?style=for-the-badge&logo=apple&logoColor=white)
 
 ![Xcode](https://img.shields.io/badge/Xcode-15.0+-147EFB?style=for-the-badge&logo=xcode&logoColor=white)
@@ -20,12 +22,20 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 ## 📱 Screenshots
 
 <p align="center">
-  <img src="docs/screenshot/main-screen.png" width="250" alt="Main Screen">
-  <img src="docs/screenshot/analysis-result.png" width="250" alt="Analysis Result">
-  <img src="docs/screenshot/risk-guide.png" width="250" alt="Risk Levels Guide">
+  <img src="docs/screenshot/main-screen.png" width="200" alt="Main Screen">
+  <img src="docs/screenshot/analysis-result.png" width="200" alt="Analysis Result">
+  <img src="docs/screenshot/ai-assistant.png" width="200" alt="AI Assistant">
+  <img src="docs/screenshot/risk-guide.png" width="200" alt="Risk Levels Guide">
 </p>
 
 ## ✨ Features
+
+### 🤖 **AI Hiking Assistant**
+- **Intelligent Chat Support**: Built-in AI assistant powered by FoundationModels framework
+- **Expert Hiking Advice**: Get personalized recommendations for trails, gear, and safety
+- **Real-time Q&A**: Ask questions about hiking techniques, weather conditions, and preparation
+- **Context-Aware Responses**: AI understands your experience level and provides relevant guidance
+- **Typing Indicators**: Modern chat interface with smooth animations and visual feedback
 
 ### 🎯 **Intelligent Risk Assessment**
 - **Machine Learning Analysis**: Advanced ML model analyzes trail parameters to predict risk levels
@@ -48,6 +58,7 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 - **Personalized Tips**: Contextual advice based on risk level
 - **Safety Guidelines**: Essential preparation recommendations
 - **Equipment Suggestions**: Risk-appropriate gear recommendations
+- **AI-Powered Insights**: Get detailed answers about hiking best practices and safety protocols
 
 ## 🛠️ Technical Features
 
@@ -58,12 +69,18 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 | ![Swift](https://img.shields.io/badge/Swift-5.9+-FA7343?style=flat-square&logo=swift&logoColor=white) | 5.9+ | Primary programming language |
 | ![SwiftUI](https://img.shields.io/badge/SwiftUI-4.0+-007AFF?style=flat-square&logo=swift&logoColor=white) | 4.0+ | Declarative UI framework |
 | ![Core ML](https://img.shields.io/badge/Core%20ML-5.0+-34C759?style=flat-square&logo=apple&logoColor=white) | 5.0+ | On-device machine learning |
+| ![FoundationModels](https://img.shields.io/badge/FoundationModels-AI%20LLM-FF6B35?style=flat-square&logo=apple&logoColor=white) | iOS 17+ | AI assistant and LLM integration |
+| ![Async/Await](https://img.shields.io/badge/Async%2FAwait-Concurrency-9B59B6?style=flat-square&logo=swift&logoColor=white) | Swift 5.5+ | Asynchronous AI response handling |
 | ![Foundation](https://img.shields.io/badge/Foundation-iOS%2017+-000000?style=flat-square&logo=apple&logoColor=white) | iOS 17+ | Core data types and models |
 
 ### **Key Features**
+- **AI Chat Integration**: FoundationModels-powered assistant with async response generation
+- **Async/Await Architecture**: Modern Swift concurrency for responsive AI interactions
+- **Real-time Messaging**: Live chat interface with typing indicators and message persistence
 - **State Management**: SwiftUI's native `@State` and `@Binding`
 - **Custom UI Components**: Reusable SwiftUI views and modifiers
 - **ML Integration**: Core ML model for risk prediction
+- **Modern Chat Interface**: Real-time messaging with typing indicators and smooth animations
 - **Modern Design**: Custom color system and animations
 
 ### **Design System**
@@ -132,14 +149,30 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 - View your personalized risk level with detailed explanation
 - Read contextual tips and recommendations
 
-### 3. **Explore Risk Levels**
+### 3. **Get Expert AI Assistance**
+- Tap the "AI Support" button to access your personal hiking assistant
+- Ask questions about trail preparation, gear recommendations, or safety tips
+- Get instant, contextual advice tailored to your hiking experience
+- View conversation history with timestamps
+
+### 4. **Explore Risk Levels**
 - Access the "Risk Levels Guide" for comprehensive information
 - Understand different difficulty categories
 - Learn about requirements for each risk level
 
-## 🧠 Machine Learning Model
+## 🧠 AI & Machine Learning
 
-The app uses a custom Core ML model trained on trail data to predict risk levels based on:
+### **AI Assistant**
+The app features a sophisticated AI assistant powered by Apple's FoundationModels framework:
+
+- **Natural Language Processing**: Understands hiking-related questions and provides expert advice
+- **Contextual Responses**: Tailored answers based on your experience level and specific needs
+- **Real-time Chat**: Instant messaging interface with typing indicators and smooth animations
+- **Conversation Memory**: Maintains context throughout your chat session
+- **Hiking Expertise**: Specialized knowledge in trail safety, gear recommendations, and outdoor best practices
+
+### **Risk Assessment Model**
+The machine learning component uses a custom Core ML model trained on trail data to predict risk levels based on:
 
 - **Distance Factor**: Longer trails increase fatigue and exposure time
 - **Elevation Impact**: Steep climbs affect difficulty and oxygen levels
@@ -169,6 +202,10 @@ The app uses a custom Core ML model trained on trail data to predict risk levels
 ```
 HikeAnalyzer/
 ├── App/                    # App entry point
+├── AIChat/                 # AI assistant functionality
+│   ├── Models/            # Chat message data models
+│   ├── Services/          # AI service integration
+│   └── Views/             # Chat interface components
 ├── Core/
 │   ├── Model/             # Data models and ML integration
 │   ├── View/              # SwiftUI views and screens
@@ -178,6 +215,9 @@ HikeAnalyzer/
 
 ### **Key Components**
 - **TrailAnalyzer**: Core ML model integration
+- **HikingAIService**: AI assistant service with FoundationModels integration
+- **AISupportChatView**: Modern chat interface with typing indicators
+- **MessageBubble**: Reusable chat message component
 - **TrailTheme**: Design system and styling
 - **RiskCardView**: Animated risk presentation
 - **HikeInputView**: Reusable input component
@@ -210,11 +250,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### 🏷️ Tags
 
 ![Machine Learning](https://img.shields.io/badge/-Machine%20Learning-FF6B35?style=flat-square)
+![AI Assistant](https://img.shields.io/badge/-AI%20Assistant-9B59B6?style=flat-square)
 ![iOS Development](https://img.shields.io/badge/-iOS%20Development-007AFF?style=flat-square)
 ![SwiftUI](https://img.shields.io/badge/-SwiftUI-FA7343?style=flat-square)
 ![Hiking](https://img.shields.io/badge/-Hiking-34C759?style=flat-square)
 ![Risk Assessment](https://img.shields.io/badge/-Risk%20Assessment-FF9500?style=flat-square)
+![Chat Interface](https://img.shields.io/badge/-Chat%20Interface-E74C3C?style=flat-square)
 
-**Built with ❤️ using SwiftUI and Core ML**
+**Built with ❤️ using SwiftUI, Core ML, and AI**
 
 </div>
