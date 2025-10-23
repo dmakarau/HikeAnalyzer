@@ -64,6 +64,10 @@ struct ContentView: View {
                 }
                 .padding(.vertical, .spacing.md)
             }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                hideKeyboard()
+            }
             .navigationTitle("Trail Analyzer")
             .navigationBarTitleDisplayMode(.large)
             .trailTheme()
@@ -75,6 +79,10 @@ struct ContentView: View {
             }
         }
         .tint(Color.theme.primary)
+    }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
