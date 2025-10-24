@@ -14,4 +14,17 @@ enum Terrain: String , Identifiable, CaseIterable {
     case sandy
     
     var id: String { rawValue }
+    
+    var description: String {
+        switch self {
+        case .paved:
+            return "Paved"
+        case .dirt:
+            return "Dirt Trail"
+        case .rocky:
+            return "Rocky Terrain"
+        case .sandy:
+            return "Sandy Path"
+        }
+    }
 }

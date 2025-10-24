@@ -40,10 +40,15 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 - **Typing Indicators**: Modern chat interface with smooth animations and visual feedback
 - **Universal Experience**: No connection errors - every device gets helpful hiking assistance
 
-### 🎯 **Intelligent Risk Assessment**
-- **Machine Learning Analysis**: Advanced ML model analyzes trail parameters to predict risk levels
-- **Comprehensive Evaluation**: Considers distance, elevation, terrain type, and wildlife danger
-- **Real-time Results**: Instant risk assessment with detailed explanations
+### 🎯 **Intelligent Risk Assessment with Apple Intelligence**
+- **Foundation Models Integration**: Advanced on-device AI analysis using Apple's latest Foundation Models framework
+- **Natural Language Explanations**: AI-powered explanations of why each risk level was assigned
+- **Personalized Safety Recommendations**: Tailored advice based on user experience and trail conditions
+- **Priority-Based Safety Guidance**: Ranked safety considerations for optimal preparation
+- **Intelligent Gear Suggestions**: Context-aware equipment recommendations
+- **Adaptive Fallback System**: Comprehensive expert knowledge when Foundation Models unavailable
+- **Real-time Analysis**: Instant AI processing with smooth loading animations
+- **Enhanced User Experience**: Modern UI with detailed sections for explanations, recommendations, and safety tips
 
 ### 🎨 **Modern Design**
 - **Professional UI**: Clean, modern interface with smooth animations
@@ -77,6 +82,10 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 | ![Foundation](https://img.shields.io/badge/Foundation-iOS%2017+-000000?style=flat-square&logo=apple&logoColor=white) | iOS 17+ | Core data types and models |
 
 ### **Key Features**
+- **Foundation Models AI**: Advanced on-device intelligence for natural language trail analysis
+- **Intelligent Risk Explanation**: AI-generated explanations of risk factors and safety considerations
+- **Personalized Recommendations**: User profile-based safety guidance and gear suggestions
+- **Hybrid Intelligence**: Seamless fallback between Foundation Models and expert knowledge systems
 - **AI Chat Integration**: Intelligent fallback system (FoundationModels not yet available on current devices)
 - **Device Adaptive**: Full AI functionality on iPhone 13+ with no connection errors or compatibility issues
 - **@Observable Architecture**: Modern Swift concurrency with @Observable pattern for optimal performance
@@ -85,7 +94,7 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 - **MVVM Pattern**: Clean separation of concerns with dedicated ViewModels
 - **State Management**: SwiftUI's modern `@Observable` and `@State` patterns
 - **Custom UI Components**: Reusable SwiftUI views and modifiers
-- **ML Integration**: Core ML model for risk prediction
+- **ML Integration**: Core ML model for risk prediction enhanced with AI explanations
 - **Modern Chat Interface**: Real-time messaging with typing indicators and smooth animations
 - **Modern Design**: Custom color system and animations
 
@@ -267,6 +276,18 @@ This is a personal educational project, but feel free to fork it and make your o
 - **📱 User Experience**: Smoother animations and more responsive interactions
 
 ## 📋 Changelog
+
+### Latest Major Feature (October 2025)
+
+- **🧠 Apple Intelligence Integration**: Revolutionary AI-powered trail analysis
+  - Foundation Models framework integration for advanced on-device AI
+  - Natural language explanations of risk assessments with detailed reasoning
+  - Personalized safety recommendations based on user experience profiles
+  - Intelligent gear suggestions tailored to specific trail conditions
+  - Priority-ranked safety guidance for optimal trip preparation
+  - Adaptive system with expert fallback when Foundation Models unavailable
+  - Enhanced UI with dedicated sections for AI explanations and recommendations
+  - Real-time processing with smooth loading animations and progress indicators
 
 ### Recent Updates (October 2025)
 

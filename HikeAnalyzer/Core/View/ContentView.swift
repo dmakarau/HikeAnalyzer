@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var trailInfo = TrailInfo()
-    @State private var isAnimating = false
+    @State private var inputViewModel = TrailInputViewModel()
     @State private var showAISupport = false
     
     var body: some View {
@@ -18,34 +17,42 @@ struct ContentView: View {
                 VStack(spacing: .spacing.md) {
                     // Header Section
                     HeaderView()
-                        .opacity(isAnimating ? 1 : 0)
-                        .offset(y: isAnimating ? 0 : -20)
-                        .animation(.easeOut(duration: 0.8).delay(0.1), value: isAnimating)
+                        .opacity(inputViewModel.isAnimating ? 1 : 0)
+                        .offset(y: inputViewModel.isAnimating ? 0 : -20)
+                        .animation(.easeOut(duration: 0.8).delay(0.1), value: inputViewModel.isAnimating)
                     
                     // Input Form
                     VStack(spacing: .spacing.sm) {
-                        HikeInfoView(trailInfo: $trailInfo)
+                        HikeInfoView(trailInfo: $inputViewModel.trailInfo)
+                        
+                        // Validation Feedback
+                        if inputViewModel.hasValidationErrors {
+                            ValidationErrorView(errors: inputViewModel.validationErrors)
+                                .transition(.opacity.combined(with: .slide))
+                        }
                     }
-                    .opacity(isAnimating ? 1 : 0)
-                    .offset(y: isAnimating ? 0 : 20)
-                    .animation(.easeOut(duration: 0.8).delay(0.3), value: isAnimating)
+                    .opacity(inputViewModel.isAnimating ? 1 : 0)
+                    .offset(y: inputViewModel.isAnimating ? 0 : 20)
+                    .animation(.easeOut(duration: 0.8).delay(0.3), value: inputViewModel.isAnimating)
                     
-                    // Submit Button
+                    // Submit Button - Enhanced with AI Analysis
                     NavigationLink {
-                        let analyzer = TrailAnalyzer()
-                        let risk = analyzer.predictRisk(trailInfo: trailInfo)
-                        PredictionResultView(risk: risk)
+                        EnhancedPredictionResultView(
+                            trailInfo: inputViewModel.trailInfo,
+                            userProfile: inputViewModel.userProfile
+                        )
                     } label: {
                         HStack(spacing: .spacing.sm) {
-                            Image(systemName: "chart.line.uptrend.xyaxis")
+                            Image(systemName: "brain.head.profile")
                                 .font(.headline)
-                            Text("Analyze Trail")
+                            Text("AI Trail Analysis")
                         }
                         .primaryButtonStyle()
                     }
-                    .opacity(isAnimating ? 1 : 0)
-                    .offset(y: isAnimating ? 0 : 20)
-                    .animation(.easeOut(duration: 0.8).delay(0.5), value: isAnimating)
+                    .disabled(!inputViewModel.isValidForAnalysis)
+                    .opacity(inputViewModel.isAnimating ? 1 : 0)
+                    .offset(y: inputViewModel.isAnimating ? 0 : 20)
+                    .animation(.easeOut(duration: 0.8).delay(0.5), value: inputViewModel.isAnimating)
                     
                     // AI Support Button
                     Button {
@@ -58,9 +65,9 @@ struct ContentView: View {
                         }
                         .supportButtonStyle()
                     }
-                    .opacity(isAnimating ? 1 : 0)
-                    .offset(y: isAnimating ? 0 : 20)
-                    .animation(.easeOut(duration: 0.8).delay(0.7), value: isAnimating)
+                    .opacity(inputViewModel.isAnimating ? 1 : 0)
+                    .offset(y: inputViewModel.isAnimating ? 0 : 20)
+                    .animation(.easeOut(duration: 0.8).delay(0.7), value: inputViewModel.isAnimating)
                 }
                 .padding(.vertical, .spacing.md)
             }
@@ -72,7 +79,11 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.large)
             .trailTheme()
             .onAppear {
-                isAnimating = true
+                inputViewModel.setAnimationState(true)
+            }
+            .onChange(of: inputViewModel.trailInfo) { _, _ in
+                // Real-time validation
+                inputViewModel.validateInput()
             }
             .sheet(isPresented: $showAISupport) {
                 AISupportChatView()
@@ -83,6 +94,44 @@ struct ContentView: View {
     
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+// MARK: - Validation Error View
+
+struct ValidationErrorView: View {
+    let errors: [ValidationError]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: .spacing.xs) {
+            HStack {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundColor(.orange)
+                Text("Please fix the following issues:")
+                    .font(.theme.callout)
+                    .fontWeight(.medium)
+                    .foregroundColor(.orange)
+                Spacer()
+            }
+            
+            ForEach(errors, id: \.localizedDescription) { error in
+                HStack(alignment: .top, spacing: .spacing.xs) {
+                    Text("•")
+                        .foregroundColor(.orange)
+                    Text(error.localizedDescription)
+                        .font(.theme.caption)
+                        .foregroundColor(Color.theme.textSecondary)
+                    Spacer()
+                }
+            }
+        }
+        .padding(.spacing.sm)
+        .background(Color.orange.opacity(0.1))
+        .cornerRadius(8)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+        )
     }
 }
 

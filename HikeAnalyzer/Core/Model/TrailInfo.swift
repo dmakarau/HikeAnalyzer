@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TrailInfo {
+struct TrailInfo: Equatable {
     var distance: Int?
     var elevation: Int?
     var terrain: Terrain = .dirt

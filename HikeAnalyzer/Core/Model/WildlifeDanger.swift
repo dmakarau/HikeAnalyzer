@@ -13,8 +13,8 @@ enum WildlifeDanger: Int, Identifiable, CaseIterable {
     
     var description: String {
         switch self {
-        case .low: return "Low"
-        case .high: return "High"
+        case .low: return "Low Wildlife Risk"
+        case .high: return "High Wildlife Risk"
         }
     }
     
