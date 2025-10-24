@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 21.10.25.
+//  Created by Denis Makarau on 05.07.25.
 //
 
 import SwiftUI

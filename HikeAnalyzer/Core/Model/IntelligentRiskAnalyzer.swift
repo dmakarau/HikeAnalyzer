@@ -2,7 +2,7 @@
 //  IntelligentRiskAnalyzer.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 23.10.25.
+//  Created by Denis Makarau on 08.09.25.
 //
 
 import CoreML
@@ -154,7 +154,7 @@ struct IntelligentRiskAnalyzer {
     
     private static func parseAIResponse(_ response: String, basePrediction: Risk) -> DetailedRiskAnalysis {
         // Debug: Log the raw response
-        print("🔍 Raw AI Response:")
+        print(" Raw AI Response:")
         print(response)
         print(String(repeating: "=", count: 50))
         
@@ -167,7 +167,7 @@ struct IntelligentRiskAnalyzer {
         let gear = extractGearSuggestions(from: sections, response: response)
         
         // Debug logging to understand parsing issues
-        print("🔍 AI Response Parsing Debug:")
+        print(" AI Response Parsing Debug:")
         print("   Sections found: \(sections.keys.sorted())")
         print("   Explanation: \(explanation.prefix(50))...")
         print("   Recommendations count: \(recommendations.count)")
@@ -227,29 +227,55 @@ struct IntelligentRiskAnalyzer {
     private static func parseListItems(_ text: String?) -> [String] {
         guard let text = text else { return [] }
         return text.components(separatedBy: .newlines)
-            .compactMap { line in
+            .compactMap { (line: String) -> String? in
                 let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                // Skip section headers (text ending with colon and containing specific keywords)
+                if trimmed.hasSuffix(":") && (trimmed.contains("RISK") || trimmed.contains("RECOMMENDATION") || 
+                   trimmed.contains("EXPLANATION") || trimmed.contains("PRIORITIES") || 
+                   trimmed.contains("GEAR") || trimmed.contains("SAFETY") || trimmed.contains("ADVICE")) {
+                    return nil
+                }
+                
                 // More flexible bullet point detection
                 if trimmed.hasPrefix("•") || trimmed.hasPrefix("-") || trimmed.hasPrefix("*") {
                     let cleaned = trimmed.replacingOccurrences(of: "^[•\\-\\*]\\s*", with: "", options: .regularExpression)
                     return cleaned.isEmpty ? nil : cleaned
                 }
-                // If no bullet points found, treat each non-empty line as an item
-                return trimmed.isEmpty ? nil : trimmed
+                
+                // For non-bullet text, only include if it doesn't look like a header and has meaningful content
+                if !trimmed.isEmpty && !trimmed.hasSuffix(":") && trimmed.count > 10 {
+                    return trimmed
+                }
+                
+                return nil
             }
     }
     
     private static func parseNumberedItems(_ text: String?) -> [String] {
         guard let text = text else { return [] }
         let items = text.components(separatedBy: .newlines)
-            .compactMap { line in
+            .compactMap { (line: String) -> String? in
                 let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                // Skip section headers
+                if trimmed.hasSuffix(":") && (trimmed.contains("RISK") || trimmed.contains("RECOMMENDATION") || 
+                   trimmed.contains("EXPLANATION") || trimmed.contains("PRIORITIES") || 
+                   trimmed.contains("GEAR") || trimmed.contains("SAFETY") || trimmed.contains("ADVICE")) {
+                    return nil
+                }
+                
                 // More flexible numbered list detection
                 if trimmed.range(of: #"^\d+\."#, options: .regularExpression) != nil {
                     return trimmed.replacingOccurrences(of: #"^\d+\.\s*"#, with: "", options: .regularExpression)
                 }
-                // If no numbers found, treat as regular list items
-                return trimmed.isEmpty ? nil : trimmed
+                
+                // For non-numbered text, only include if it doesn't look like a header and has meaningful content
+                if !trimmed.isEmpty && !trimmed.hasSuffix(":") && trimmed.count > 10 {
+                    return trimmed
+                }
+                
+                return nil
             }
         
         // If we got no numbered items, try parsing as regular list

@@ -2,7 +2,7 @@
 //  RiskSummaryView.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 22.10.25.
+//  Created by Denis Makarau on 18.07.25.
 //
 
 import SwiftUI

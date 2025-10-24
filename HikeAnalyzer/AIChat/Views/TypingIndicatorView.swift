@@ -2,7 +2,7 @@
 //  TypingIndicatorView.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 20.10.25.
+//  Created by Denis Makarau on 12.10.25.
 //
 
 import SwiftUI

@@ -1,8 +1,9 @@
 //
-//  MessageBubble.swift
-//  AISocialChat
 //
-//  Created by Denis Makarau on 20.10.25.
+//  MessageBubble.swift
+//  HikeAnalyzer
+//
+//  Created by Denis Makarau on 30.09.25.
 //
 
 import SwiftUI
