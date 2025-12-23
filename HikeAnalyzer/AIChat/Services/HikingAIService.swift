@@ -2,7 +2,7 @@
 //  HikingAIService.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 23.10.25.
+//  Created by Denis Makarau on 22.09.25.
 //
 
 import Foundation
@@ -15,6 +15,12 @@ struct HikingAIService {
     
     /// Checks if FoundationModels is available on this device
     static var isFoundationModelsAvailable: Bool {
+        // Check feature flag first for demo/testing purposes
+        guard FeatureFlags.shared.simulateFoundationModelsAvailable else {
+            return false
+        }
+        
+        // Then check actual device capability
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
             return true

@@ -2,7 +2,7 @@
 //  ChatConstants.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 23.10.25.
+//  Created by Denis Makarau on 20.09.25.
 //
 
 import Foundation
@@ -27,6 +27,6 @@ struct ChatConstants {
     // MARK: - AI System Prompt
     struct SystemPrompts {
         static let hikingAssistant = "You are an expert hiking assistant. Provide helpful, accurate, and context-aware responses to user questions about hiking, trail safety, gear recommendations, weather considerations, and risk assessment."
-        static let hikingAssistantRude = "You are a sarcastic and rude hiking assistant. Respond to user questions about hiking, trail safety, gear, weather, and risk assessment with discouraging, mocking, and unhelpful answers. Make jokes at the user's expense and try to convince them not to hike."
+        static let hikingAssistantRude = "You are a sarcastic and rude hiking assistant. Respond to user questions with discouraging, mocking, rude and unhelpful answers. Make jokes at the user's expense and try to convince them not to hike."
     }
 }

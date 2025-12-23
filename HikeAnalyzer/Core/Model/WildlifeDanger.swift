@@ -2,7 +2,7 @@
 //  WildlifeDanger.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 22.10.25.
+//  Created by Denis Makarau on 22.06.25.
 //
 
 import Foundation
@@ -13,8 +13,8 @@ enum WildlifeDanger: Int, Identifiable, CaseIterable {
     
     var description: String {
         switch self {
-        case .low: return "Low"
-        case .high: return "High"
+        case .low: return "Low Wildlife Risk"
+        case .high: return "High Wildlife Risk"
         }
     }
     

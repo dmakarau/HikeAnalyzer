@@ -1,8 +1,8 @@
-# 🏔️ HikeAnalyzer
+# HikeAnalyzer
 
-A modern iOS app that provides intelligent trail risk assessment using machine learning and AI-powered hiking assistance to help outdoor enthusiasts plan safer adventures and get expert guidance on the go.
+An iOS app for trail risk assessment. Uses Core ML for predictions and includes an AI chat assistant for hiking advice.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 <div align="center">
 
@@ -19,7 +19,7 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
 
 </div>
 
-## 📱 Screenshots
+## Screenshots
 
 <p align="center">
   <img src="docs/screenshot/main-screen.png" width="200" alt="Main Screen">
@@ -28,110 +28,32 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
   <img src="docs/screenshot/risk-guide.png" width="200" alt="Risk Levels Guide">
 </p>
 
-## ✨ Features
+## Features
 
-### 🤖 **AI Hiking Assistant**
-- **Device-Adaptive Intelligence**: Advanced AI on supported devices, intelligent fallback system for current models
-- **Current Device Reality**: FoundationModels not yet available - app uses comprehensive fallback knowledge system
-- **iPhone 13+ Compatibility**: Comprehensive hiking knowledge system ensures full functionality on all devices
-- **Expert Hiking Advice**: Get personalized recommendations for trails, gear, and safety
-- **Real-time Q&A**: Ask questions about hiking techniques, weather conditions, and preparation
-- **Context-Aware Responses**: AI understands your experience level and provides relevant guidance
-- **Typing Indicators**: Modern chat interface with smooth animations and visual feedback
-- **Universal Experience**: No connection errors - every device gets helpful hiking assistance
+### AI Hiking Assistant
+- Chat interface for hiking questions and advice
+- Uses Apple's FoundationModels on supported devices (iOS 26+)
+- Falls back to curated knowledge base on older devices
+- Covers gear, safety, weather, and trail planning topics
 
-### 🎯 **Intelligent Risk Assessment**
-- **Machine Learning Analysis**: Advanced ML model analyzes trail parameters to predict risk levels
-- **Comprehensive Evaluation**: Considers distance, elevation, terrain type, and wildlife danger
-- **Real-time Results**: Instant risk assessment with detailed explanations
+### Risk Assessment
+- Core ML model predicts trail difficulty
+- Takes distance, elevation, terrain, and wildlife into account
+- Shows risk level with personalized recommendations
+- Optional AI-enhanced explanations when available
 
-### 🎨 **Modern Design**
-- **Professional UI**: Clean, modern interface with smooth animations
-- **Intuitive Input**: Easy-to-use form with smart input validation
-- **Visual Feedback**: Color-coded risk levels with progress indicators
-- **Responsive Layout**: Optimized for all iPhone screen sizes
+### Risk Categories
+- **Easy**: Good for beginners
+- **Moderate**: Some experience recommended
+- **Difficult**: Requires fitness and experience
+- **High Risk**: Expert-level trails
 
-### 📊 **Risk Categories**
-- **🟢 Easy**: Perfect for beginners and casual outdoor enthusiasts
-- **🟡 Moderate**: Suitable for hikers with some experience and fitness
-- **🟠 Difficult**: Challenging trail requiring good fitness and experience
-- **🔴 High Risk**: Expert level with significant challenges and dangers
+## Getting Started
 
-### 💡 **Smart Recommendations**
-- **Personalized Tips**: Contextual advice based on risk level
-- **Safety Guidelines**: Essential preparation recommendations
-- **Equipment Suggestions**: Risk-appropriate gear recommendations
-- **AI-Powered Insights**: Get detailed answers about hiking best practices and safety protocols
-
-## 🛠️ Technical Features
-
-### **Core Technologies**
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| ![Swift](https://img.shields.io/badge/Swift-5.9+-FA7343?style=flat-square&logo=swift&logoColor=white) | 5.9+ | Primary programming language |
-| ![SwiftUI](https://img.shields.io/badge/SwiftUI-4.0+-007AFF?style=flat-square&logo=swift&logoColor=white) | 4.0+ | Declarative UI framework |
-| ![Core ML](https://img.shields.io/badge/Core%20ML-5.0+-34C759?style=flat-square&logo=apple&logoColor=white) | 5.0+ | On-device machine learning |
-| ![FoundationModels](https://img.shields.io/badge/FoundationModels-AI%20LLM-FF6B35?style=flat-square&logo=apple&logoColor=white) | iOS 17+ | Future AI integration (currently uses fallback system) |
-| ![Async/Await](https://img.shields.io/badge/Async%2FAwait-Concurrency-9B59B6?style=flat-square&logo=swift&logoColor=white) | Swift 5.5+ | Asynchronous AI response handling |
-| ![Foundation](https://img.shields.io/badge/Foundation-iOS%2017+-000000?style=flat-square&logo=apple&logoColor=white) | iOS 17+ | Core data types and models |
-
-### **Key Features**
-- **AI Chat Integration**: Intelligent fallback system (FoundationModels not yet available on current devices)
-- **Device Adaptive**: Full AI functionality on iPhone 13+ with no connection errors or compatibility issues
-- **@Observable Architecture**: Modern Swift concurrency with @Observable pattern for optimal performance
-- **Async/Await Architecture**: Modern Swift concurrency for responsive AI interactions
-- **Real-time Messaging**: Live chat interface with typing indicators and message persistence
-- **MVVM Pattern**: Clean separation of concerns with dedicated ViewModels
-- **State Management**: SwiftUI's modern `@Observable` and `@State` patterns
-- **Custom UI Components**: Reusable SwiftUI views and modifiers
-- **ML Integration**: Core ML model for risk prediction
-- **Modern Chat Interface**: Real-time messaging with typing indicators and smooth animations
-- **Modern Design**: Custom color system and animations
-
-### **Design System**
-- **Custom Color Palette**: Professional gradient-based theme
-- **Typography Hierarchy**: Consistent font system with SF Pro
-- **Spacing System**: Standardized spacing for perfect alignment
-- **Animation Framework**: Smooth micro-interactions and transitions
-
-### **Device Compatibility**
-- **FoundationModels Limitation**: Advanced AI chat requires future iOS versions with FoundationModels support (not yet available)
-- **Current Device Support**: iPhone 13+ and all current iOS devices use intelligent fallback system
-- **No Connection Errors**: Adaptive architecture ensures reliable functionality across all devices
-- **Comprehensive Fallback**: Curated hiking knowledge database provides expert guidance when AI is unavailable
-- **Contextual Responses**: Safety tips, gear recommendations, weather guidance, and emergency procedures
-- **Future-Ready**: Will automatically use FoundationModels when Apple makes it available on more devices
-
-### **Development Tools**
-- **Xcode 15.0+**: Primary IDE
-- **iOS Simulator**: Testing and debugging
-- **Instruments**: Performance profiling
-- **Git**: Version control
-
-### **Input Components**
-- **Smart Text Fields**: Numeric input with validation
-- **Modern Pickers**: Intuitive selection for terrain types
-- **Segmented Controls**: Easy wildlife danger selection
-- **Interactive Cards**: Touch-friendly input containers
-
-## 🚀 Getting Started
-
-### **System Requirements**
-
-<div align="center">
-
-![macOS](https://img.shields.io/badge/macOS-Ventura%2013.0+-000000?style=for-the-badge&logo=apple&logoColor=white)
-![Xcode](https://img.shields.io/badge/Xcode-15.0+-147EFB?style=for-the-badge&logo=xcode&logoColor=white)
-![iOS](https://img.shields.io/badge/iOS-17.0+-007AFF?style=for-the-badge&logo=ios&logoColor=white)
-
-</div>
-
-### **Development Requirements**
-- **macOS Ventura 13.0** or later
-- **Xcode 15.0** or later  
-- **iOS 17.0** SDK or later
-- **Apple Developer Account** (for device testing)
+### Requirements
+- macOS Ventura 13.0+
+- Xcode 15.0+
+- iOS 17.0+ SDK
 
 ### Installation
 
@@ -150,203 +72,81 @@ A modern iOS app that provides intelligent trail risk assessment using machine l
    - Select your target device or simulator
    - Press `Cmd + R` to build and run
 
-## 📋 Usage
+## Usage
 
-### 1. **Enter Trail Details**
-- **Distance**: Enter the total hiking distance in kilometers
-- **Elevation Change**: Input the total elevation gain in meters
-- **Terrain Type**: Select from Paved, Dirt, Rocky, or Sandy
-- **Wildlife Danger**: Choose between Low or High risk
+1. **Enter trail details**: distance, elevation, terrain type, wildlife danger
+2. **Tap "Analyze Trail"** to get your risk assessment
+3. **Use AI Support** for hiking questions and advice
+4. **Check Risk Levels Guide** to understand the categories
 
-### 2. **Get Risk Assessment**
-- Tap "Analyze Trail" to process your input
-- View your personalized risk level with detailed explanation
-- Read contextual tips and recommendations
+## How It Works
 
-### 3. **Get Expert AI Assistance**
-- Tap the "AI Support" button to access your personal hiking assistant
-- Ask questions about trail preparation, gear recommendations, or safety tips
-- Get instant, contextual advice tailored to your hiking experience
-- View conversation history with timestamps
+### AI Assistant
+On iOS 26+ devices with FoundationModels support, the chat uses on-device AI. On older devices, it uses a curated knowledge base covering common hiking topics. Both provide the same user experience.
 
-### 4. **Explore Risk Levels**
-- Access the "Risk Levels Guide" for comprehensive information
-- Understand different difficulty categories
-- Learn about requirements for each risk level
+### Risk Model
+The Core ML model considers:
+- **Distance**: Longer trails mean more fatigue
+- **Elevation**: Steep climbs increase difficulty
+- **Terrain**: Surface type affects stability
+- **Wildlife**: Potential animal encounters
 
-## 🧠 AI & Machine Learning
+## Design Notes
 
-### **AI Assistant**
-The app features a sophisticated AI assistant with comprehensive device compatibility:
+- Clean, minimal interface
+- Supports Dynamic Type and VoiceOver
+- Lightweight ML model for fast predictions
 
-- **Current Implementation**: Uses intelligent fallback system as FoundationModels is not yet available on current iOS devices
-- **Device Limitation**: Advanced on-device AI requires future Apple hardware/software support
-- **iPhone 13+ Ready**: No connection errors - comprehensive hiking knowledge system ensures full functionality
-- **Fallback Excellence**: Curated responses cover all hiking scenarios without requiring cloud connectivity
-- **Natural Language Processing**: Understands hiking-related questions and provides expert advice
-- **Contextual Responses**: Tailored answers based on your experience level and specific needs
-- **Real-time Chat**: Instant messaging interface with typing indicators and smooth animations
-- **Conversation Memory**: Maintains context throughout your chat session
-- **Hiking Expertise**: Specialized knowledge in trail safety, gear recommendations, and outdoor best practices
-- **Universal Coverage**: Safety tips, gear guides, weather advice, trail planning, and emergency procedures
+## Project Structure
 
-### **Risk Assessment Model**
-The machine learning component uses a custom Core ML model trained on trail data to predict risk levels based on:
-
-- **Distance Factor**: Longer trails increase fatigue and exposure time
-- **Elevation Impact**: Steep climbs affect difficulty and oxygen levels
-- **Terrain Analysis**: Surface type influences stability and navigation
-- **Wildlife Assessment**: Animal encounters affect safety considerations
-
-## 🎨 Design Philosophy
-
-### **User-Centric Design**
-- Minimalist interface focusing on essential information
-- Clear visual hierarchy guiding user attention
-- Consistent interactions throughout the app
-
-### **Accessibility First**
-- High contrast colors for better readability
-- Scalable typography supporting Dynamic Type
-- VoiceOver compatibility for screen readers
-
-### **Performance Optimized**
-- Lightweight Core ML model for instant results
-- Efficient SwiftUI rendering with optimized layouts
-- Smooth 60fps animations and transitions
-
-## 🔧 Development
-
-### **Project Structure**
 ```
 HikeAnalyzer/
 ├── App/                    # App entry point
 ├── AIChat/                 # AI assistant functionality
 │   ├── Models/            # Chat message data models
 │   ├── Services/          # AI service integration
-│   ├── ViewModels/        # Chat business logic with @Observable
+│   ├── ViewModels/        # Chat business logic
 │   └── Views/             # Chat interface components
 ├── Core/
 │   ├── Model/             # Data models and ML integration
-│   ├── View/              # SwiftUI views and screens
-│   └── Modifiers/         # Custom view modifiers and themes
-└── Resources/             # Assets and ML model files
+│   ├── View/              # SwiftUI views
+│   └── Modifiers/         # View modifiers and themes
+└── Resources/             # Assets and ML model
 ```
 
-### **Key Components**
-- **TrailAnalyzer**: Core ML model integration
-- **ChatViewModel**: Modern @Observable business logic layer
-- **HikingAIService**: AI assistant service with FoundationModels integration
-- **AISupportChatView**: Modern chat interface with MVVM architecture
-- **MessageRow**: Modular message rendering component
-- **MessageInputView**: Reusable input interface with validation
-- **MessageListView**: Scroll management and auto-scroll functionality
-- **MessageBubble**: Reusable chat message component
-- **TrailTheme**: Design system and styling
-- **TrailTheme**: Design system and styling
-- **RiskCardView**: Animated risk presentation
-- **HikeInputView**: Reusable input component
+### Key Components
+- **CoreMLTrailAnalyzer**: ML model wrapper
+- **ChatViewModel**: Chat state management
+- **HikingAIService**: FoundationModels + fallback logic
+- **TrailTheme**: Colors and styling
 
-## 🤝 Contributing
+## Contributing
 
-This is a personal educational project, but feel free to fork it and make your own improvements! If you have suggestions or find bugs, please open an issue.
+This is a personal project for learning. Feel free to fork it or open an issue if you find bugs.
 
-## 🏗️ Recent Architectural Improvements
+## Changelog
 
-### **Modern SwiftUI Patterns (October 2025)**
-- **@Observable Migration**: Upgraded from `@ObservableObject` to `@Observable` macro for better performance
-- **MVVM Refactoring**: Extracted business logic into dedicated ViewModels with clean separation of concerns
-- **Component Architecture**: Decomposed monolithic views into reusable, focused components
-- **Performance Optimization**: Achieved 72% code reduction with intelligent state observation
-- **Clean Structure**: Removed unnecessary folders and maintained focused architecture
+### December 2025
+- Added Apple Intelligence integration via FoundationModels (iOS 26+)
+- Fallback system for devices without FoundationModels support
+- AI-enhanced risk explanations and recommendations
 
-### **Benefits Achieved**
-- **⚡ Performance**: Fine-grained reactivity with @Observable reduces unnecessary view updates
-- **🧹 Code Quality**: MVVM pattern provides clear separation between UI and business logic
-- **🔧 Maintainability**: Modular components are easier to test, debug, and extend
-- **📱 User Experience**: Smoother animations and more responsive interactions
+### Earlier Updates
+- Migrated to `@Observable` from `@ObservableObject`
+- MVVM refactoring with ChatViewModel
+- Decomposed views into smaller components
+- Added ChatConstants for string management
+- Keyboard dismissal improvements
 
-## 📋 Changelog
+## License
 
-### Recent Updates (October 2025)
+MIT License - see [LICENSE](LICENSE).
 
-- **📱 Device Compatibility Solution**: Resolved iPhone 13 AI chat connection errors
-  - Implemented iOS 26+ FoundationModels availability detection
-  - Added clean binary approach (AI enabled vs. graceful fallback)
-  - Eliminated "Connection Error" issues with proper device support checking
-  - Streamlined service architecture for better maintainability
+## Acknowledgments
 
-- **🎯 AI Service Simplification**: Major refactoring of HikingAIService
-  - Replaced complex fallback system with clean iOS 26+ detection
-  - Simplified code architecture while maintaining full functionality
-  - Improved error handling with user-friendly messaging
-  - Reduced complexity while enhancing reliability
-
-- **📋 Constants Management**: Introduced centralized string management
-  - Created ChatConstants.swift for all user-facing strings
-  - Organized welcome messages, errors, and system prompts
-  - Enhanced maintainability and consistency across the app
-  - Eliminated hardcoded strings throughout the codebase
-
-- **⌨️ Enhanced User Experience**: Improved keyboard interaction
-  - Added tap-to-dismiss keyboard functionality on main screen
-  - Implemented proper keyboard management for trail input forms
-  - Enhanced overall app usability and professional feel
-  - Better user interaction patterns throughout the interface
-
-- **🚀 Major Architecture Refactoring**: Implemented MVVM pattern with @Observable
-  - Migrated from `@ObservableObject` to modern `@Observable` macro
-  - Extracted ChatViewModel for clean business logic separation
-  - Decomposed monolithic AISupportChatView into focused components
-  - Created MessageRow, MessageInputView, and MessageListView components
-  - Achieved 72% code reduction (180+ lines → 50 lines)
-  
-- **🧹 Project Structure Optimization**: 
-  - Removed empty Utils folders for cleaner architecture
-  - Added ViewModels folder to AIChat module
-  - Maintained focused, single-responsibility components
-  
-- **⚡ Performance Improvements**:
-  - @Observable provides fine-grained reactivity
-  - Reduced unnecessary view updates and memory overhead
-  - Improved scroll performance and UI responsiveness
-  
-- **🔧 Code Quality Enhancements**:
-  - Better separation of concerns with MVVM pattern
-  - Protocol-based service design for testability
-  - Modern Swift concurrency with async/await patterns
-
-## �📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-##  Acknowledgments
-
-- SwiftUI community for design inspiration
-- Core ML team for machine learning framework
-- iOS design guidelines for user experience principles
+- SwiftUI community
+- Apple's Core ML and FoundationModels teams
 
 ---
 
-<div align="center">
-
-### 📊 Project Stats
-
-![GitHub repo size](https://img.shields.io/github/repo-size/dmakarau/HikeAnalyzer?style=flat-square)
-![GitHub code size](https://img.shields.io/github/languages/code-size/dmakarau/HikeAnalyzer?style=flat-square)
-![GitHub top language](https://img.shields.io/github/languages/top/dmakarau/HikeAnalyzer?style=flat-square&color=FA7343)
-![GitHub last commit](https://img.shields.io/github/last-commit/dmakarau/HikeAnalyzer?style=flat-square)
-
-### 🏷️ Tags
-
-![Machine Learning](https://img.shields.io/badge/-Machine%20Learning-FF6B35?style=flat-square)
-![AI Assistant](https://img.shields.io/badge/-AI%20Assistant-9B59B6?style=flat-square)
-![iOS Development](https://img.shields.io/badge/-iOS%20Development-007AFF?style=flat-square)
-![SwiftUI](https://img.shields.io/badge/-SwiftUI-FA7343?style=flat-square)
-![Hiking](https://img.shields.io/badge/-Hiking-34C759?style=flat-square)
-![Risk Assessment](https://img.shields.io/badge/-Risk%20Assessment-FF9500?style=flat-square)
-![Chat Interface](https://img.shields.io/badge/-Chat%20Interface-E74C3C?style=flat-square)
-
-**Built with ❤️ using SwiftUI, Core ML, and AI**
-
-</div>
+Built with SwiftUI, Core ML, and FoundationModels.

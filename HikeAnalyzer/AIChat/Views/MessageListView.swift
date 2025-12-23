@@ -2,7 +2,7 @@
 //  MessageListView.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 23.10.25.
+//  Created by Denis Makarau on 05.10.25.
 //
 
 import SwiftUI

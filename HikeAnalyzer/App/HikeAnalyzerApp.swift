@@ -2,7 +2,7 @@
 //  HikeAnalyzerApp.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 21.10.25.
+//  Created by Denis Makarau on 15.06.25.
 //
 
 import SwiftUI

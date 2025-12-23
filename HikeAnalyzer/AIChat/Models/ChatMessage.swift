@@ -2,7 +2,7 @@
 //  ChatMessage.swift
 //  HikeAnalyzer
 //
-//  Created by Denis Makarau on 23.10.25.
+//  Created by Denis Makarau on 18.09.25.
 //
 
 import Foundation
