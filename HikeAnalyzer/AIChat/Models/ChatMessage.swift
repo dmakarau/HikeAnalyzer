@@ -1,23 +1,17 @@
-//
-//  ChatMessage.swift
-//  HikeAnalyzer
-//
-//  Created by Denis Makarau on 18.09.25.
-//
-
 import Foundation
 
-/// Represents a single message in the AI chat conversation
-struct ChatMessage: Identifiable, Codable {
+struct ChatMessage: Identifiable {
     let id: UUID
     let content: String
     let isFromUser: Bool
     let timestamp: Date
-    
-    init(id: UUID = UUID(), content: String, isFromUser: Bool, timestamp: Date = Date()) {
+    var analysisReport: TrailAnalysisReportData?
+
+    init(id: UUID = UUID(), content: String, isFromUser: Bool, timestamp: Date = Date(), analysisReport: TrailAnalysisReportData? = nil) {
         self.id = id
         self.content = content
         self.isFromUser = isFromUser
         self.timestamp = timestamp
+        self.analysisReport = analysisReport
     }
 }

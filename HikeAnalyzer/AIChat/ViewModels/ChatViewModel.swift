@@ -1,113 +1,46 @@
-//
-//  ChatViewModel.swift
-//  HikeAnalyzer
-//
-//  Created by Denis Makarau on 25.09.25.
-//
-
 import Foundation
-import Combine
 
 @Observable
 @MainActor
 final class ChatViewModel {
-    // MARK: - Properties
     var messages: [ChatMessage] = []
     var messageText = ""
     var isGeneratingResponse = false
     var hasError = false
     var errorMessage = ""
-    
-    // MARK: - Private Properties
-    private var cancellables = Set<AnyCancellable>()
-    
-    // MARK: - Initialization
+
+    private let service = HikingAIService()
+
     init() {
-        setupInitialMessage()
+        messages = [ChatMessage(content: HikingAIService.welcomeMessage, isFromUser: false)]
     }
-    
-    // MARK: - Public Methods
+
     func sendMessage() async {
-        let userMessage = messageText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !userMessage.isEmpty, !isGeneratingResponse else { return }
-        
-        // Add user message
-        addUserMessage(userMessage)
-        clearMessageText()
-        
-        // Generate AI response
-        await generateAIResponse(for: userMessage)
+        let text = messageText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty, !isGeneratingResponse else { return }
+
+        messages.append(ChatMessage(content: text, isFromUser: true))
+        messageText = ""
+
+        isGeneratingResponse = true
+        clearError()
+
+        let (content, report) = await service.sendMessage(text)
+        messages.append(ChatMessage(content: content, isFromUser: false, analysisReport: report))
+
+        isGeneratingResponse = false
     }
-    
+
     func clearError() {
         hasError = false
         errorMessage = ""
     }
-    
+
     var canSendMessage: Bool {
         !messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !isGeneratingResponse
     }
-    
+
     var shouldShowTypingIndicator: Bool {
         isGeneratingResponse
     }
-    
-    // MARK: - Private Methods
-    private func setupInitialMessage() {
-        let welcomeMessage = ChatMessage(
-            content: HikingAIService.welcomeMessage,
-            isFromUser: false
-        )
-        messages = [welcomeMessage]
-    }
-    
-    private func addUserMessage(_ content: String) {
-        let userMessage = ChatMessage(
-            id: UUID(),
-            content: content,
-            isFromUser: true,
-            timestamp: Date()
-        )
-        messages.append(userMessage)
-    }
-    
-    private func addAIMessage(_ content: String) {
-        let aiMessage = ChatMessage(
-            id: UUID(),
-            content: content,
-            isFromUser: false,
-            timestamp: Date()
-        )
-        messages.append(aiMessage)
-    }
-    
-    private func clearMessageText() {
-        messageText = ""
-    }
-    
-    private func generateAIResponse(for userMessage: String) async {
-        isGeneratingResponse = true
-        clearError()
-        
-        let aiResponse = await HikingAIService.generateResponse(for: userMessage)
-        addAIMessage(aiResponse)
-        
-        isGeneratingResponse = false
-    }
-    
-    private func handleAIError(_ error: Error) {
-        hasError = true
-        errorMessage = ChatConstants.Errors.connectionError
-        
-        // Add fallback message to chat
-        addAIMessage(ChatConstants.Errors.connectionErrorDetailed)
-    }
 }
-
-// MARK: - Service Protocol
-protocol HikingAIServiceProtocol {
-    static func generateResponse(for message: String) async throws -> String
-}
-
-// MARK: - Service Conformance
-extension HikingAIService: HikingAIServiceProtocol {}

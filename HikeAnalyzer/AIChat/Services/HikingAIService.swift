@@ -1,62 +1,72 @@
-//
-//  HikingAIService.swift
-//  HikeAnalyzer
-//
-//  Created by Denis Makarau on 22.09.25.
-//
-
 import Foundation
 #if canImport(FoundationModels)
 import FoundationModels
 #endif
 
-/// Service responsible for generating AI responses for hiking-related queries
-struct HikingAIService {
-    
-    /// Checks if FoundationModels is available on this device
-    static var isFoundationModelsAvailable: Bool {
-        // Check feature flag first for demo/testing purposes
-        guard FeatureFlags.shared.simulateFoundationModelsAvailable else {
-            return false
-        }
-        
-        // Then check actual device capability
+final class HikingAIService {
+
+    // Stores LanguageModelSession as Any to avoid availability annotation on stored property
+    private var _session: Any?
+
+    static var isAvailable: Bool {
+        guard FeatureFlags.shared.simulateFoundationModelsAvailable else { return false }
         #if canImport(FoundationModels)
-        if #available(iOS 26.0, *) {
-            return true
-        }
+        if #available(iOS 26.0, *) { return true }
         #endif
         return false
     }
-    
-    /// Generates an AI response for the given user message
-    static func generateResponse(for message: String) async -> String {
-        if isFoundationModelsAvailable {
-            #if canImport(FoundationModels)
-            do {
-                let model = SystemLanguageModel()
-                let session = LanguageModelSession(model: model) {
-                    ChatConstants.SystemPrompts.hikingAssistant
-                }
-                
-                let response = try await session.respond(to: message)
-                return response.content
-            } catch {
-                return ChatConstants.Errors.connectionFailed
-            }
-            #endif
-        }
-        
-        return ChatConstants.Errors.notSupported
-    }
-    
-    /// Provides a welcome message for new chat sessions
+
     static var welcomeMessage: String {
-        if isFoundationModelsAvailable {
-            return ChatConstants.Welcome.aiEnabled
-        } else {
-            return ChatConstants.Welcome.aiNotSupported
+        isAvailable ? ChatConstants.Welcome.aiEnabled : ChatConstants.Welcome.aiNotSupported
+    }
+
+    func sendMessage(_ text: String) async -> (content: String, report: TrailAnalysisReportData?) {
+        #if canImport(FoundationModels)
+        if #available(iOS 26.0, *) {
+            return await sendWithFoundationModels(text)
         }
+        #endif
+        return (ChatConstants.Errors.notSupported, nil)
+    }
+
+    // MARK: - FoundationModels
+
+    #if canImport(FoundationModels)
+    @available(iOS 26.0, *)
+    private func getSession() -> LanguageModelSession {
+        if let existing = _session as? LanguageModelSession { return existing }
+        let model = SystemLanguageModel()
+        let session = LanguageModelSession(model: model, tools: [TrailAnalyzerTool()]) {
+            ChatConstants.SystemPrompts.hikingAssistant
+        }
+        _session = session
+        return session
+    }
+
+    @available(iOS 26.0, *)
+    private func sendWithFoundationModels(_ text: String) async -> (content: String, report: TrailAnalysisReportData?) {
+        do {
+            let session = getSession()
+            if containsTrailParameters(text) {
+                let response = try await session.respond(to: text, generating: TrailAnalysisReport.self)
+                return (ChatConstants.Analysis.reportReady, response.content.toReportData())
+            } else {
+                let response = try await session.respond(to: text)
+                return (response.content, nil)
+            }
+        } catch {
+            return (ChatConstants.Errors.connectionFailed, nil)
+        }
+    }
+    #endif
+
+    // MARK: - Trail parameter detection
+
+    private func containsTrailParameters(_ message: String) -> Bool {
+        let hasNumbers = message.range(of: "\\d+", options: .regularExpression) != nil
+        let trailKeywords = ["km", "kilometer", "metre", "meter", "elevation", "terrain",
+                             "rocky", "paved", "dirt", "sandy", "trail", "hike", "analyze", "analysis"]
+        let lowercased = message.lowercased()
+        return hasNumbers && trailKeywords.contains { lowercased.contains($0) }
     }
 }
-

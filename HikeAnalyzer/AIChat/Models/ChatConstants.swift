@@ -24,9 +24,19 @@ struct ChatConstants {
         static let connectionErrorDetailed = "I'm sorry, I'm having trouble connecting right now. Please try again in a moment."
     }
     
+    // MARK: - Analysis Messages
+    struct Analysis {
+        static let reportReady = "Here's your personalized trail analysis."
+    }
+
     // MARK: - AI System Prompt
     struct SystemPrompts {
-        static let hikingAssistant = "You are an expert hiking assistant. Provide helpful, accurate, and context-aware responses to user questions about hiking, trail safety, gear recommendations, weather considerations, and risk assessment."
-        static let hikingAssistantRude = "You are a sarcastic and rude hiking assistant. Respond to user questions with discouraging, mocking, rude and unhelpful answers. Make jokes at the user's expense and try to convince them not to hike."
+        static let hikingAssistant = """
+        You are an expert hiking assistant with access to an on-device CoreML trail risk analyzer.
+        For general hiking questions, respond concisely and helpfully.
+        When a user describes a specific trail — providing distance, elevation, terrain, or wildlife conditions — \
+        call the analyzeTrail tool to get the risk prediction, then use that result to inform your full response.
+        Always base risk assessments on the CoreML tool output, not on assumptions.
+        """
     }
 }

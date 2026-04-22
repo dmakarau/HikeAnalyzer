@@ -1,15 +1,8 @@
-//
-//  MessageRow.swift
-//  HikeAnalyzer
-//
-//  Created by Denis Makarau on 08.10.25.
-//
-
 import SwiftUI
 
 struct MessageRow: View {
     let message: ChatMessage
-    
+
     var body: some View {
         VStack(alignment: message.isFromUser ? .trailing : .leading, spacing: .spacing.xs) {
             HStack {
@@ -19,12 +12,18 @@ struct MessageRow: View {
                 } else {
                     HStack(alignment: .top, spacing: .spacing.sm) {
                         UserAvatar()
-                        MessageBubble(message: message)
+                        VStack(alignment: .leading, spacing: .spacing.sm) {
+                            MessageBubble(message: message)
+                            if let report = message.analysisReport {
+                                TrailReportCardView(report: report)
+                                    .transition(.move(edge: .leading).combined(with: .opacity))
+                            }
+                        }
                     }
-                    Spacer(minLength: 50)
+                    Spacer(minLength: 16)
                 }
             }
-            
+
             MessageTimestamp(
                 timestamp: message.timestamp,
                 isFromUser: message.isFromUser
@@ -35,6 +34,7 @@ struct MessageRow: View {
 }
 
 // MARK: - Supporting Views
+
 private struct UserAvatar: View {
     var body: some View {
         Image(systemName: "person.crop.circle.fill")
@@ -46,7 +46,7 @@ private struct UserAvatar: View {
 private struct MessageTimestamp: View {
     let timestamp: Date
     let isFromUser: Bool
-    
+
     var body: some View {
         Text(timestamp, format: .dateTime.hour().minute())
             .font(.theme.caption)
@@ -58,10 +58,9 @@ private struct MessageTimestamp: View {
 #Preview {
     VStack(spacing: .spacing.md) {
         MessageRow(message: ChatMessage(
-            content: "Hello! I'm your AI hiking assistant. How can I help you today?",
+            content: "Hello! I'm your AI hiking assistant.",
             isFromUser: false
         ))
-        
         MessageRow(message: ChatMessage(
             content: "What should I pack for a day hike?",
             isFromUser: true
