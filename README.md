@@ -1,21 +1,16 @@
 # HikeAnalyzer
 
-An iOS app for trail risk assessment. Uses Core ML for predictions and includes an AI chat assistant for hiking advice.
+An iOS app for trail risk assessment. Uses Core ML for predictions and an on-device AI agent for hiking advice — showcasing iOS 26 FoundationModels tool calling and structured output.
 
 ## Tech Stack
 
 <div align="center">
 
-![Swift](https://img.shields.io/badge/Swift-5.9+-FA7343?style=for-the-badge&logo=swift&logoColor=white)
-![SwiftUI](https://img.shields.io/badge/SwiftUI-4.0+-007AFF?style=for-the-badge&logo=swift&logoColor=white)
-![Core ML](https://img.shields.io/badge/Core%20ML-5.0+-34C759?style=for-the-badge&logo=apple&logoColor=white)
-![FoundationModels](https://img.shields.io/badge/FoundationModels-AI%20LLM-FF6B35?style=for-the-badge&logo=apple&logoColor=white)
-![Async/Await](https://img.shields.io/badge/Async%2FAwait-Concurrency-9B59B6?style=for-the-badge&logo=swift&logoColor=white)
-![Foundation](https://img.shields.io/badge/Foundation-iOS%2017+-000000?style=for-the-badge&logo=apple&logoColor=white)
-
-![Xcode](https://img.shields.io/badge/Xcode-15.0+-147EFB?style=for-the-badge&logo=xcode&logoColor=white)
-![iOS](https://img.shields.io/badge/iOS-17.0+-007AFF?style=for-the-badge&logo=ios&logoColor=white)
-![Educational](https://img.shields.io/badge/Purpose-Educational-4CAF50?style=for-the-badge&logo=graduation-cap&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-6.0+-FA7343?style=for-the-badge&logo=swift&logoColor=white)
+![SwiftUI](https://img.shields.io/badge/SwiftUI-iOS%2026-007AFF?style=for-the-badge&logo=swift&logoColor=white)
+![Core ML](https://img.shields.io/badge/Core%20ML-On--device-34C759?style=for-the-badge&logo=apple&logoColor=white)
+![FoundationModels](https://img.shields.io/badge/FoundationModels-iOS%2026+-FF6B35?style=for-the-badge&logo=apple&logoColor=white)
+![Async/Await](https://img.shields.io/badge/Async%2FAwait-Swift%206-9B59B6?style=for-the-badge&logo=swift&logoColor=white)
 
 </div>
 
@@ -30,30 +25,39 @@ An iOS app for trail risk assessment. Uses Core ML for predictions and includes 
 
 ## Features
 
-### AI Hiking Assistant
-- Chat interface for hiking questions and advice
-- Uses Apple's FoundationModels on supported devices (iOS 26+)
-- Falls back to curated knowledge base on older devices
-- Covers gear, safety, weather, and trail planning topics
+### AI Agent with Tool Calling (iOS 26+)
+The chat assistant is a genuine AI agent — not just a chatbot. When you describe a trail, the on-device language model autonomously calls the CoreML risk model as a **tool**, then generates a structured `@Generable` report rendered as a rich UI card.
 
-### Risk Assessment
-- Core ML model predicts trail difficulty
-- Takes distance, elevation, terrain, and wildlife into account
-- Shows risk level with personalized recommendations
-- Optional AI-enhanced explanations when available
+- Describe a trail in natural language and the AI calls CoreML on your behalf
+- Structured output via `@Generable` — typed Swift structs, not string parsing
+- Report card with risk level, hazards, gear checklist, and numbered safety steps
+- Persistent `LanguageModelSession` across messages for full conversation context
+- General questions return plain conversational text — the agent decides when to analyze
 
-### Risk Categories
-- **Easy**: Good for beginners
-- **Moderate**: Some experience recommended
-- **Difficult**: Requires fitness and experience
-- **High Risk**: Expert-level trails
+### Trail Risk Assessment
+- Core ML model predicts trail difficulty from distance, elevation, terrain, and wildlife
+- AI-enhanced explanations and personalized recommendations (iOS 26+)
+- Four risk levels: Easy, Moderate, Difficult, High Risk
+
+## How to Test the AI Agent
+
+Open the AI Hiking Assistant and try these:
+
+**Triggers a structured report card:**
+> "Analyze a 12km rocky trail with 900m elevation gain and high wildlife danger"
+
+**Tests follow-up with persistent context:**
+> "What if I lower the elevation to 400m?"
+
+**Returns plain conversational text (no card):**
+> "What should I eat before a long hike?"
 
 ## Getting Started
 
 ### Requirements
-- macOS Ventura 13.0+
-- Xcode 15.0+
-- iOS 17.0+ SDK
+- Xcode 16.0+
+- iOS 26.0+ device or simulator
+- Apple Intelligence enabled for full FoundationModels support
 
 ### Installation
 
@@ -68,84 +72,54 @@ An iOS app for trail risk assessment. Uses Core ML for predictions and includes 
    open HikeAnalyzer.xcodeproj
    ```
 
-3. **Build and Run**
-   - Select your target device or simulator
-   - Press `Cmd + R` to build and run
+3. **Build and Run** — `Cmd + R`
 
-## Usage
+## Architecture
 
-1. **Enter trail details**: distance, elevation, terrain type, wildlife danger
-2. **Tap "Analyze Trail"** to get your risk assessment
-3. **Use AI Support** for hiking questions and advice
-4. **Check Risk Levels Guide** to understand the categories
-
-## How It Works
-
-### AI Assistant
-On iOS 26+ devices with FoundationModels support, the chat uses on-device AI. On older devices, it uses a curated knowledge base covering common hiking topics. Both provide the same user experience.
-
-### Risk Model
-The Core ML model considers:
-- **Distance**: Longer trails mean more fatigue
-- **Elevation**: Steep climbs increase difficulty
-- **Terrain**: Surface type affects stability
-- **Wildlife**: Potential animal encounters
-
-## Design Notes
-
-- Clean, minimal interface
-- Supports Dynamic Type and VoiceOver
-- Lightweight ML model for fast predictions
-
-## Project Structure
+MVVM with `@Observable` + `@MainActor`. Two feature modules: `Core` (trail analysis) and `AIChat` (agent chat).
 
 ```
 HikeAnalyzer/
-├── App/                    # App entry point
-├── AIChat/                 # AI assistant functionality
-│   ├── Models/            # Chat message data models
-│   ├── Services/          # AI service integration
-│   ├── ViewModels/        # Chat business logic
-│   └── Views/             # Chat interface components
 ├── Core/
-│   ├── Model/             # Data models and ML integration
-│   ├── View/              # SwiftUI views
-│   └── Modifiers/         # View modifiers and themes
-└── Resources/             # Assets and ML model
+│   ├── Model/             # Risk, TrailInfo, IntelligentRiskAnalyzer
+│   ├── Services/          # CoreMLTrailAnalyzer, FeatureFlags
+│   ├── View/              # Trail input and results screens
+│   ├── ViewModels/        # TrailInputViewModel, TrailAnalysisViewModel
+│   └── Modifiers/         # TrailTheme (design system)
+└── AIChat/
+    ├── Models/            # ChatMessage, TrailAnalysisReport (@Generable)
+    ├── Services/          # HikingAIService, TrailAnalyzerTool (Tool)
+    ├── ViewModels/        # ChatViewModel
+    └── Views/             # Chat UI, TrailReportCardView
 ```
 
-### Key Components
-- **CoreMLTrailAnalyzer**: ML model wrapper
-- **ChatViewModel**: Chat state management
-- **HikingAIService**: FoundationModels + fallback logic
-- **TrailTheme**: Colors and styling
-
-## Contributing
-
-This is a personal project for learning. Feel free to fork it or open an issue if you find bugs.
+### Key iOS 26 APIs used
+- **`Tool` protocol** — `TrailAnalyzerTool` wraps `CoreMLTrailAnalyzer` so the language model can invoke CoreML as a function
+- **`@Generable` / `@Guide`** — `TrailAnalysisReport` is a typed Swift struct the model fills directly, no string parsing
+- **`LanguageModelSession`** — persistent session with tool registration and `respond(to:generating:)` for structured output
+- **`SystemLanguageModel`** — fully on-device, no network, no API keys
 
 ## Changelog
 
-### December 2025
-- Added Apple Intelligence integration via FoundationModels (iOS 26+)
-- Fallback system for devices without FoundationModels support
-- AI-enhanced risk explanations and recommendations
+### April 2026
+- AI agent: FoundationModels tool calling with CoreML as an invokable tool
+- Structured output via `@Generable` — `TrailAnalysisReport` with hazards, gear, and safety steps
+- `TrailReportCardView` — rich card rendered in chat for trail-specific queries
+- Persistent `LanguageModelSession` for conversation context across messages
 
-### Earlier Updates
-- Migrated to `@Observable` from `@ObservableObject`
-- MVVM refactoring with ChatViewModel
-- Decomposed views into smaller components
-- Added ChatConstants for string management
-- Keyboard dismissal improvements
+### December 2025
+- Apple Intelligence integration via FoundationModels (iOS 26+)
+- AI-enhanced risk explanations and recommendations
+- Fallback for devices without FoundationModels support
+
+### Earlier
+- MVVM refactoring with `@Observable`
+- Core ML trail risk model
+- AI chat assistant
 
 ## License
 
-MIT License - see [LICENSE](LICENSE).
-
-## Acknowledgments
-
-- SwiftUI community
-- Apple's Core ML and FoundationModels teams
+MIT License — see [LICENSE](LICENSE).
 
 ---
 
